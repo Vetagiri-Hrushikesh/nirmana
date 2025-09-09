@@ -1,40 +1,493 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #cccccc;
+  background-color: #1e1e1e;
+  --sidebar-width: 200px;
+  --primary-color: #007acc;
+  --hover-color: #2a2d2e;
+  --border-color: #3c3c3c;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-}
-
-h1 {
-  font-size: 4em;
-  line-height: 1.1;
-  margin: 0;
+  overflow: hidden;
 }
 
 #app {
   width: 100%;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.hello-container {
+.nirmana-container {
+  width: 100%;
+  height: 100vh;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+}
+
+/* Sidebar styles removed */
+
+/* Main Content Styles */
+.main-content {
+  flex: 1;
+  background-color: #1e1e1e;
+  overflow-y: auto;
+  display: flex;
   justify-content: center;
-  height: 100%;
+  align-items: flex-start;
+  padding-top: 60px;
+}
+
+.welcome-screen {
+  padding: 20px 40px;
+  max-width: 900px;
   width: 100%;
 }
 
+.welcome-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo-container {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.nirmana-logo {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.nirmana-logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.3));
+}
+
+.welcome-header h1 {
+  font-size: 2.5em;
+  margin: 0 0 8px 0;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.welcome-header p {
+  font-size: 1em;
+  color: #999999;
+  margin: 0;
+  font-weight: 300;
+}
+
+/* Action Buttons */
+.welcome-actions {
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+}
+
+.action-btn {
+  background: #2a2d2e;
+  border: 1px solid var(--border-color);
+  padding: 12px 16px;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 13px;
+  text-align: center;
+  border-radius: 6px;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  min-width: 0;
+}
+
+.action-btn:hover {
+  background-color: #3a3d3e;
+  border-color: var(--primary-color);
+}
+
+.action-btn.primary {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.action-btn.primary:hover {
+  background-color: #005a9e;
+}
+
+/* Search Section */
+.search-section {
+  margin-bottom: 30px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  width: 14px;
+  height: 14px;
+  stroke: #999999;
+  z-index: 1;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 10px 10px 36px;
+  background-color: #2a2d2e;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.search-input::placeholder {
+  color: #999999;
+}
+
+.search-input:focus {
+  border-color: var(--primary-color);
+  background-color: #3a3d3e;
+}
+
+.search-input:focus + .search-icon {
+  stroke: var(--primary-color);
+}
+
+/* Professional IDEs handle actions immediately - no loading animations */
+
+.action-icon {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
+.action-title {
+  font-weight: 500;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* Welcome Sections */
+.welcome-sections {
+  display: flex;
+  justify-content: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.section {
+  width: 100%;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.section h2 {
+  font-size: 0.9em;
+  margin: 0;
+  color: #cccccc;
+  font-weight: 400;
+  text-align: left;
+}
+
+.view-all-link {
+  font-size: 0.8em;
+  color: #cccccc;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.view-all-link:hover {
+  color: #007acc;
+}
+
+/* Lists */
+.project-list,
+.template-list,
+.marketplace-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.project-item,
+.template-item,
+.marketplace-item {
+  padding: 6px 0;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+  display: grid;
+  grid-template-columns: 16px 1fr auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.project-icon {
+  width: 12px;
+  height: 12px;
+  stroke: #007acc;
+  flex-shrink: 0;
+}
+
+.project-item:hover,
+.template-item:hover,
+.marketplace-item:hover {
+  background-color: var(--hover-color);
+  border-radius: 4px;
+}
+
+.project-item:hover .project-icon {
+  stroke: #ffffff;
+}
+
+.project-name,
+.template-name,
+.marketplace-name {
+  font-size: 12px;
+  color: #ffffff;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.project-path,
+.template-desc,
+.marketplace-desc {
+  font-size: 11px;
+  color: #999999;
+  font-family: monospace;
+  line-height: 1.2;
+  opacity: 0.8;
+  text-align: right;
+}
+
+/* Light Theme */
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #333333;
     background-color: #ffffff;
+    --hover-color: #f3f3f3;
+    --border-color: #e1e1e1;
+  }
+  
+  .main-content {
+    background-color: #ffffff;
+  }
+  
+  .welcome-header h1 {
+    color: #333333;
+  }
+  
+  .welcome-header p {
+    color: #666666;
+  }
+  
+  .nirmana-logo {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  }
+  
+  .nirmana-logo:hover {
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.2));
+  }
+  
+  .action-btn {
+    color: #333333;
+    background: #f3f3f3;
+  }
+  
+  .action-btn:hover {
+    background-color: #e8e8e8;
+  }
+  
+  .search-input {
+    background-color: #f3f3f3;
+    color: #333333;
+    border-color: #e1e1e1;
+  }
+  
+  .search-input:focus {
+    background-color: #ffffff;
+    border-color: var(--primary-color);
+  }
+  
+  .search-icon {
+    stroke: #666666;
+  }
+  
+  .section h2 {
+    color: #333333;
+  }
+  
+  .view-all-link {
+    color: #333333;
+  }
+  
+  .view-all-link:hover {
+    color: #007acc;
+  }
+  
+  .project-name,
+  .template-name,
+  .marketplace-name {
+    color: #333333;
+  }
+  
+  .project-path,
+  .template-desc,
+  .marketplace-desc {
+    color: #666666;
+  }
+  
+  .project-icon {
+    stroke: #007acc;
+  }
+  
+  .project-item:hover .project-icon {
+    stroke: #333333;
+  }
+}
+
+/* Footer Styles */
+.footer {
+  height: 32px;
+  background-color: #252526;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  flex-shrink: 0;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.footer-left,
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-center {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-btn:hover {
+  background-color: var(--hover-color);
+}
+
+.footer-icon {
+  width: 16px;
+  height: 16px;
+  stroke: #cccccc;
+}
+
+.footer-btn:hover .footer-icon {
+  stroke: var(--primary-color);
+}
+
+.status-text {
+  font-size: 12px;
+  color: #4CAF50;
+  font-weight: 500;
+}
+
+.version {
+  font-size: 12px;
+  color: #999999;
+  font-family: monospace;
+}
+
+.separator {
+  font-size: 12px;
+  color: #666666;
+}
+
+.build-info {
+  font-size: 11px;
+  color: #888888;
+  font-style: italic;
+}
+
+/* Professional IDEs keep interactions minimal - no ripple effects */
+
+/* Light Theme Footer */
+@media (prefers-color-scheme: light) {
+  .footer {
+    background-color: #f3f3f3;
+  }
+  
+  .footer-icon {
+    stroke: #333333;
+  }
+  
+  .footer-btn:hover .footer-icon {
+    stroke: var(--primary-color);
+  }
+  
+  .status-text {
+    color: #2E7D32;
+  }
+  
+  .version {
+    color: #666666;
+  }
+  
+  .separator {
+    color: #999999;
+  }
+  
+  .build-info {
+    color: #777777;
   }
 }

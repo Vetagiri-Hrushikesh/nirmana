@@ -1,1 +1,48 @@
-"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});const o=require("electron"),d=require("node:url"),n=require("node:path");var i=typeof document<"u"?document.currentScript:null;const s=n.dirname(d.fileURLToPath(typeof document>"u"?require("url").pathToFileURL(__filename).href:i&&i.tagName.toUpperCase()==="SCRIPT"&&i.src||new URL("main.js",document.baseURI).href));process.env.APP_ROOT=n.join(s,"..");const t=process.env.VITE_DEV_SERVER_URL,a=n.join(process.env.APP_ROOT,"dist-electron"),r=n.join(process.env.APP_ROOT,"dist");process.env.VITE_PUBLIC=t?n.join(process.env.APP_ROOT,"public"):r;let e;function c(){e=new o.BrowserWindow({width:1024,height:768,minWidth:800,minHeight:600,icon:n.join(process.env.VITE_PUBLIC,"electron-vite.svg"),webPreferences:{preload:n.join(s,"preload.js")}}),e.webContents.on("did-finish-load",()=>{e==null||e.webContents.send("main-process-message",new Date().toLocaleString())}),t?e.loadURL(t):e.loadFile(n.join(r,"index.html"))}o.app.on("window-all-closed",()=>{process.platform!=="darwin"&&(o.app.quit(),e=null)});o.app.on("activate",()=>{o.BrowserWindow.getAllWindows().length===0&&c()});o.app.whenReady().then(c);exports.MAIN_DIST=a;exports.RENDERER_DIST=r;exports.VITE_DEV_SERVER_URL=t;
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const electron = require("electron");
+const node_url = require("node:url");
+const path = require("node:path");
+var _documentCurrentScript = typeof document !== "undefined" ? document.currentScript : null;
+const __dirname$1 = path.dirname(node_url.fileURLToPath(typeof document === "undefined" ? require("url").pathToFileURL(__filename).href : _documentCurrentScript && _documentCurrentScript.tagName.toUpperCase() === "SCRIPT" && _documentCurrentScript.src || new URL("main.js", document.baseURI).href));
+process.env.APP_ROOT = path.join(__dirname$1, "..");
+const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
+const MAIN_DIST = path.join(process.env.APP_ROOT, "dist-electron");
+const RENDERER_DIST = path.join(process.env.APP_ROOT, "dist");
+process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, "public") : RENDERER_DIST;
+let win;
+function createWindow() {
+  win = new electron.BrowserWindow({
+    width: 1024,
+    height: 768,
+    minWidth: 800,
+    minHeight: 600,
+    icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
+    webPreferences: {
+      preload: path.join(__dirname$1, "preload.js")
+    }
+  });
+  win.webContents.on("did-finish-load", () => {
+    win == null ? void 0 : win.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
+  });
+  if (VITE_DEV_SERVER_URL) {
+    win.loadURL(VITE_DEV_SERVER_URL);
+  } else {
+    win.loadFile(path.join(RENDERER_DIST, "index.html"));
+  }
+}
+electron.app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    electron.app.quit();
+    win = null;
+  }
+});
+electron.app.on("activate", () => {
+  if (electron.BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
+});
+electron.app.whenReady().then(createWindow);
+exports.MAIN_DIST = MAIN_DIST;
+exports.RENDERER_DIST = RENDERER_DIST;
+exports.VITE_DEV_SERVER_URL = VITE_DEV_SERVER_URL;
