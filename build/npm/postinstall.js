@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(__dirname, '../..');
 
 console.log('\x1b[1;32m*** Running Nirmana IDE postinstall tasks...\x1b[0;0m');
 

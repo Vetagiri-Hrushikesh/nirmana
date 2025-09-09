@@ -1,0 +1,7 @@
+{
+  "name": "nirmana-component-library",
+  "version": "1.0.0",
+  "description": "Default component library for Nirmana IDE",
+  "main": "index.js",
+  "components": []
+}
